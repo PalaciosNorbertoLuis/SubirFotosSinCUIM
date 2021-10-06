@@ -1,0 +1,69 @@
+<div class="card text-center">
+  <div class="card-gropu">
+    <div class="card-header" *ngIf="index2 != 0">
+      Se va a subir {{ index2 }} foto<span *ngIf="index2 >= 2">{{ "s" }}</span>
+    </div>
+    <div *ngFor="let url of urls; let i = index" class="container-a2">
+      <ul class="caption-style-2">
+        <li>
+          <img [src]="url" />
+          <div class="caption">
+            <div class="blur"></div>
+            <div class="caption-text">
+              <button
+                mat-fab
+                color="warn"
+                aria-label="Example icon button with a delete icon"
+                (click)="borrarImagen(i)"
+              >
+                <mat-icon>delete_forever</mat-icon>
+              </button>
+              <!-- modal Inicio -->
+
+              <ng-template #content let-c="close" let-d="dismiss">
+                <div class="modal-body">
+                  <img class="img-modal" [src]="url" />
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-outline-dark"
+                    (click)="c('Save click')"
+                  >
+                    Cerrar
+                  </button>
+                </div>
+              </ng-template>
+
+              <button
+                mat-fab
+                color="primary"
+                aria-label="Example icon button with a delete icon"
+                (click)="open(content)"
+              >
+                <mat-icon>zoom_in</mat-icon>
+              </button>
+
+              <!--Modal Fin-->
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="card text-center">
+  <div class="card-body text-center">
+    <input
+      type="file"
+      class="input-group-text"
+      multiple
+      placeholder="nada"
+      accept="image/*"
+      (change)="detectFiles($event)"
+    />
+  </div>
+</div>
+
+<!-- Test -->

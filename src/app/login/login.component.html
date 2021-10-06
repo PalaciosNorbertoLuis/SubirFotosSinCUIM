@@ -1,0 +1,48 @@
+<body>
+  <div class="title">
+    <h1>A.N.M.a.C.</h1>
+    <h2>Agencia Nacional de Materiales Controlados</h2>
+    <h4>Ministerio de Justicia y Derechos Humanos</h4>
+  </div>
+  <div class="container">
+    <h1>Ingreso</h1>
+    <h4>Subir fotos sin CUIM</h4>
+    <form (ngSubmit)="onLogin()" [formGroup]="formLogin">
+      <div class="form-control">
+        <input type="text" name="user" required formControlName="user"  autocomplete=off/>
+        <label>
+          <span style="transition-delay: 0ms">U</span>
+          <span style="transition-delay: 50ms">s</span>
+          <span style="transition-delay: 100ms">u</span>
+          <span style="transition-delay: 150ms">a</span>
+          <span style="transition-delay: 200ms">r</span>
+          <span style="transition-delay: 250ms">i</span>
+          <span style="transition-delay: 300ms">o</span>
+        </label>
+      </div>
+
+      <div class="form-control">
+        <input
+          type="password"
+          name="password"
+          required
+          formControlName="password"
+        />
+        <label>
+          <span style="transition-delay: 0ms">C</span>
+          <span style="transition-delay: 50ms">o</span>
+          <span style="transition-delay: 100ms">n</span>
+          <span style="transition-delay: 150ms">t</span>
+          <span style="transition-delay: 200ms">r</span>
+          <span style="transition-delay: 250ms">a</span>
+          <span style="transition-delay: 300ms">s</span>
+          <span style="transition-delay: 350ms">e</span>
+          <span style="transition-delay: 400ms">ñ</span>
+          <span style="transition-delay: 450ms">a</span>
+        </label>
+      </div>
+
+      <button class="btn" id="BTN" type="submit">Ingresar</button>
+    </form>
+  </div>
+</body>

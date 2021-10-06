@@ -1,0 +1,116 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Muli", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 89vh;
+  overflow: hidden;
+  margin: 0;
+}
+
+.title {
+  text-align: center;
+}
+
+.title h1,
+h2,
+h4 {
+  margin: 1px;
+}
+
+.container {
+  border-style: double;
+  padding: 20px 40px;
+  border-radius: 5px;
+}
+
+.container h1,
+h4 {
+  text-align: center;
+  margin: 1px;
+}
+
+.container a {
+  text-decoration: none;
+  color: lightblue;
+}
+
+.btn {
+  cursor: pointer;
+  display: inline-block;
+  width: 100%;
+  background: #4e5152;
+  padding: 15px;
+  font-family: inherit;
+  font-size: 20px;
+  border: 0;
+  border-radius: 5px;
+  letter-spacing: 3px;
+}
+
+.btn:hover {
+  background: #212324;
+  color: #616668;
+  transition: 0.2s;
+  letter-spacing: 8px;
+  text-shadow: 2px 2px 5px rgb(41, 75, 168);
+}
+
+.btn:focus {
+  outline: 0;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.form-control {
+  position: relative;
+  margin: 20px 0 40px;
+  width: 300px;
+  color: rgb(0, 0, 0);
+}
+
+.form-control input {
+  background-color: transparent;
+  border: 0;
+  border-bottom: 2px rgb(0, 0, 0) solid;
+  display: block;
+  width: 100%;
+  padding: 15px 0;
+  font-size: 18px;
+  color: rgb(0, 0, 0);
+}
+
+.form-control input:focus,
+.form-control input:valid {
+  outline: 0;
+  border-bottom-color: #262829;
+}
+
+.form-control label {
+  position: absolute;
+  top: 15px;
+  left: 0;
+  pointer-events: none;
+}
+
+.form-control label span {
+  display: inline-block;
+  font-size: 18px;
+  letter-spacing: 3px;
+  min-width: 5px;
+  transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.form-control input:focus + label span,
+.form-control input:valid + label span {
+  color: #afa7a7;
+  transform: translateY(-30px);
+  font-size: 10px;
+}
