@@ -12,7 +12,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import { NgbModule,NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
-
+import { ConsultsService } from './services/consults.service';
 
 @NgModule({
   declarations: [
@@ -20,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
     UploadPhotoComponent,
     LoginComponent,
     PageNotFoundComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -34,7 +35,9 @@ import { HttpClientModule } from '@angular/common/http';
     NgbAlertModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    ConsultsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

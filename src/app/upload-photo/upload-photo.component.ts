@@ -1,6 +1,7 @@
 import { Variable } from '@angular/compiler/src/render3/r3_ast';
 import { Component, OnInit } from '@angular/core';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ConsultsService } from '../services/consults.service';
 
 
 @Component({
@@ -16,7 +17,9 @@ export class UploadPhotoComponent {
   index2:number = 0;
   images = [];
 
-  constructor(config: NgbModalConfig, private modalService: NgbModal) {
+  constructor(config: NgbModalConfig, 
+              private modalService: NgbModal,
+              private consultService:ConsultsService) {
     // customize default values of modals used by this component tree
     config.backdrop = true; //'static';
     config.keyboard = true;
@@ -25,6 +28,27 @@ export class UploadPhotoComponent {
   }
   open(content:any) {
     this.modalService.open(content);
+  }
+
+  Reference(reference: number){
+    this.consultService.getReference(reference).subscribe(
+      res => console.log(res)
+    );
+    
+  }
+
+  Filter(reference: number){
+    this.consultService.getFilter(reference).subscribe(
+      res => console.log(res)
+    );
+    
+  }
+
+  Folder(reference: number){
+    this.consultService.getDirectoryArm(reference).subscribe(
+      res => console.log(res)
+    );
+    
   }
   
 
