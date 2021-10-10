@@ -1,0 +1,27 @@
+  <!-- Lista de detalles (inicio) --->
+  <!-- <div class="card text-center">
+    <div *ngFor="let item of filter; let i = index">
+      <p>{{ filter[i].idTmpArma }}</p>
+    </div>
+  </div> -->
+  <!-- Lista de detalles (Fin) -->
+  <div class="card text-center">
+
+  <input
+    type="text"
+    name="referencia"
+    [(ngModel)] = 'referencia'
+    class="input-group-text text-center form-control"
+    placeholder="Número de referencia"
+  />
+
+  <button
+    class="btn-btn btn-primary"
+    color="primary"
+    aria-label="Example icon button with a delete icon"
+    
+    (click)="SerchReference(referencia)"
+  >
+    Buscar
+  </button>
+</div>

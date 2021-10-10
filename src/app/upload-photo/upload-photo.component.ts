@@ -10,6 +10,7 @@ import { ConsultsService } from '../services/consults.service';
   styleUrls: ['./upload-photo.component.css'],
   providers: [NgbModalConfig, NgbModal]
 })
+
 export class UploadPhotoComponent {
   urls =  Array<string>();
   files = [];
@@ -29,28 +30,6 @@ export class UploadPhotoComponent {
   open(content:any) {
     this.modalService.open(content);
   }
-
-  Reference(reference: number){
-    this.consultService.getReference(reference).subscribe(
-      res => console.log(res)
-    );
-    
-  }
-
-  Filter(reference: number){
-    this.consultService.getFilter(reference).subscribe(
-      res => console.log(res)
-    );
-    
-  }
-
-  Folder(reference: number){
-    this.consultService.getDirectoryArm(reference).subscribe(
-      res => console.log(res)
-    );
-    
-  }
-  
 
   detectFiles(event:any) {
   // console.log(this.urls);

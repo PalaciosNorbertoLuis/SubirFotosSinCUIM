@@ -13,13 +13,15 @@ import {MatIconModule} from '@angular/material/icon';
 import { NgbModule,NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { ConsultsService } from './services/consults.service';
+import { DataArmComponent } from './data-arm/data-arm.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UploadPhotoComponent,
     LoginComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    DataArmComponent
     
   ],
   imports: [
