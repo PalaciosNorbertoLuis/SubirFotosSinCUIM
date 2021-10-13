@@ -1,0 +1,11 @@
+
+
+.caption-style-2 img{
+    height: 141px;
+    width: 165px;
+    border: 1px solid #000;
+    margin: 10px 5px 5px 5px;
+    float: left;
+    z-index: 4;
+    border-radius: 8px;
+  }

@@ -37,7 +37,7 @@ export class UploadPhotoComponent {
    
     let files = event.target.files;
     let images = event.target.files;
-    //console.log(files);
+    console.log(files);
     if (files) {
       
       for (let file of files) {
