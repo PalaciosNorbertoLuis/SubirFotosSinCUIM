@@ -1,6 +1,8 @@
-<div class="card text-center">
+<!-- <div class="container"> -->
+<div class="card">
   <div class="card-gropu">
-    <div class="card-header" *ngIf="index2 != 0">
+    <h2>Seleccione las fotos a subir</h2>
+    <div class="card-header" *ngIf="index2 != 0" >
       Se va a subir {{ index2 }} foto<span *ngIf="index2 >= 2">{{ "s" }}</span>
     </div>
     <div *ngFor="let url of urls; let i = index" class="container-a2">
@@ -51,9 +53,9 @@
       </ul>
     </div>
   </div>
-</div>
+  </div>
 
-<div class="card text-center">
+  <div class="card">
   <div class="card-body text-center">
     <input
       type="file"
@@ -61,10 +63,25 @@
       multiple
       placeholder="nada"
       accept="image/*"
-      (change)="detectFiles($event)"
+      (change)="detectFiles($event)" 
     />
+    </div>
   </div>
+    <div class="card" *ngIf="index2 != 0 ">
+      <button
+        mat-raised-button
+        color="primary"
+        aria-label="Example icon button with a delete icon"
+      >
+        <mat-icon>
+          drive_folder_upload
+        </mat-icon>
+        Guardar Fotos
+      </button>
+    
 </div>
+<!-- </div> -->
+
 
 <!-- Test -->
 

@@ -1,95 +1,165 @@
-
-<!-- Datos del Arma-->
-<div class="card-header text-center" *ngIf="consultGet.idDescripcionArma != null">
-  <h1>Detalles del arma</h1>
-  <div class="card-header align-items-center">
-    <strong class="flex">Numero de serie: </strong>
-    {{ referenceGet.numeroSerie }} <strong> Tipo: </strong>
-    {{ consultGet.tipoArma }} <strong> Marca: </strong> {{ consultGet.marca }}
-    <strong> Modelo: </strong> {{ consultGet.modelo }}
-    <strong> Calibre: </strong> {{ consultGet.calibre }}
-    {{ consultGet.medida }} {{ consultGet.clase }}
+<div class="container">
+  <!-- Busqueda por referencia-->
+  <div class="conteiner" *ngIf="referenceGet.idTmpArma == null">
+    <h2>Busqueda de arma por referencia</h2>
+    <div class="input-group">
+      <button
+        class="btn btn btn-outline-primary"
+        type="button"
+        id="button-addon1"
+        (click)="SerchReference(referencia)"
+      >
+        Buscar
+      </button>
+      <input
+        type="text"
+        name="referencia"
+        [(ngModel)]="referencia"
+        class="form-control"
+        placeholder="Ingrese número de referencia"
+        aria-label="Example text with button addon"
+        aria-describedby="button-addon1"
+      />
+    </div>
   </div>
-  <div class="card-header align-items-center felx" *ngIf="referenceGet.estado != null">
-      <strong>Estado: </strong> {{ referenceGet.estado }}<span *ngIf="referenceGet.idDescArmaFK == null">--Falta-K</span> 
-  </div>
-</div>
- <!-- Datos del Arma FIN-->
-<!-- Observaciones-->
-<div class="card" >
-  <div *ngFor="let item of observationGet; let i = index">
-    <h3 class="text-center" *ngIf="i == 0">Observaciones</h3>
-    <strong>{{ observationGet[i].fecha }}</strong>
-  <p>{{ observationGet[i].observacion}}</p>
-  </div>
-</div>
-<!-- Observaciones FIN-->
+  <!-- Busqueda por referencia FIN-->
 
-<!-- Filtros-->
-<div class="card" >
-  <div *ngFor="let item of filterGet; let i = index">
-    <h3 class="text-center" *ngIf="i == 0">Filtros</h3>
-    <strong>{{ filterGet[i].fechaFiltro }}  </strong>
-  <span>{{ filterGet[i].filtro}}</span> <span *ngIf="filterGet[i].tipoOperadorFiltro == 'R'; else elseBlock">  Registral</span> 
-  <ng-template #elseBlock> Técnico</ng-template>
-  </div>
-</div>
-<!-- Filtros FIN-->
-
-<!-- Fotos -->
-<div *ngFor="let image of folderGet; let i = index" class="container-a2">
-  <ul class="caption-style-2">
-    <dl>
-      <img [src]="image"/>
-      <div class="caption">
-        <div class="blur"></div>
-        <div class="caption-text">
-
-          <!-- modal Inicio -->
-
-          <!-- <ng-template #content let-c="close" let-d="dismiss">
-            <div class="modal-body">
-              <img class="img-modal" [src]="image" />
-            </div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-outline-dark"
-                (click)="c('Save click')"
-              >
-                Cerrar
-              </button>
-            </div>
-          </ng-template> -->
-
-          <!-- <button
-            mat-fab
-            color="primary"
-            aria-label="Example icon button with a delete icon"
-            (click)="open(content)"
-          >
-            <mat-icon>zoom_in</mat-icon>
-          </button> -->
-
-          <!--Modal Fin-->
-        </div>
+  <!-- Datos del Arma-->
+  <div *ngIf="referenceGet.idTmpArma != null" class="card">
+    <h2>Detalles del arma</h2>
+    <div class="d-flex justify-content-around">
+      <div class="alert alert-dark" role="alert">
+        <strong>Numero de serie: </strong>
+        {{ numeroSerie }}
       </div>
-    </dl>
-  </ul>
+      <div class="alert alert-dark" role="alert">
+        <strong> Tipo: </strong>
+        {{ tipo }}
+      </div>
+      <div class="alert alert-dark" role="alert">
+        <strong> Marca: </strong>
+        {{ marca }}
+      </div>
+      <div class="alert alert-dark" role="alert">
+        <strong> Modelo: </strong>
+        {{ modelo }}
+      </div>
+      <div class="alert alert-dark" role="alert">
+        <strong> Calibre: </strong>
+        {{ calibre }} {{ medida }} {{ clase }}
+      </div>
+    </div>
+    <div
+      class="alert alert-secondary"
+      role="alert"
+      *ngIf="referenceGet.estado != null"
+    >
+      <strong>Estado: </strong> {{ referenceGet.estado
+      }}<span *ngIf="referenceGet.idDescArmaFK == null">--Falta-K</span>
+    </div>
+  </div>
+
+  <!-- Datos del Arma FIN-->
+
+  <!-- Filtros-->
+  <div *ngIf="filterGet != null" class="card">
+    <h2>Filtros</h2>
+    <div class="d-flex justify-content-around">
+      <div
+        class="alert alert-warning"
+        *ngFor="let item of filterGet; let i = index"
+      >
+        <strong>{{ filterGet[i].fecha | date:'dd/MM/yyyy' }} </strong>
+        <span>{{ filterGet[i].filtro }}</span>
+        <span *ngIf="filterGet[i].tipoOperadorFiltro == 'R'; else elseBlock">
+          Registral
+        </span>
+        <ng-template #elseBlock> Técnico</ng-template>
+      </div>
+    </div>
+  </div>
+  <!-- Filtros FIN-->
+
+  <!-- Observaciones-->
+  <div *ngIf="observationGet != null" class="card">
+    <h2>Observaciones</h2>
+    <div class="d-flex flex-column">
+      <div
+        class="alert alert-primary"
+        *ngFor="let item of observationGet; let i = index"
+      >
+        <strong>{{ observationGet[i].fecha }}</strong>
+        <p>{{ observationGet[i].observacion }}</p>
+      </div>
+    </div>
+  </div>
+  <!-- Observaciones FIN-->
+
+  <!-- Fotos -->
+  <div *ngIf="folderGet2 != null" class="card">
+    <h2>
+      {{ fecha2 }}
+    </h2>
+    <div class="flex">
+      <div *ngFor="let image of folderGet; let i = index" class="flex">
+        <ul class="caption-style-2">
+          <li>
+            <img [src]="image" />
+            <div class="caption">
+              <div class="blur">
+                <div class="caption-text">
+                  <!-- modal Inicio -->
+                  <ng-template #content let-c="close" let-d="dismiss">
+                    <div class="modal-body">
+                      <img class="img-modal" [src]="image" />
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-outline-dark"
+                        (click)="c('Save click')"
+                      >
+                        Cerrar
+                      </button>
+                    </div>
+                  </ng-template>
+
+                  <button
+                    mat-fab
+                    color="primary"
+                    aria-label="Example icon button with a delete icon"
+                    (click)="open(content)"
+                  >
+                    <mat-icon>zoom_in</mat-icon>
+                  </button>
+                  <!--Modal Fin-->
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- fotos FIN -->
+
+  <div *ngIf="referenceGet.idTmpArma != null" class="d-flex justify-content-around">
+    <button
+      class="btn btn btn-outline-primary"
+      type="button"
+      (click)="ShowUpload()"
+    >
+      Subir fotos
+    </button>
+
+    <button
+      class="btn btn btn-outline-primary"
+      type="button"
+      
+    >
+      Nueva busqueda
+    </button>
+  </div>
+  <app-upload-photo *ngIf="showSelected"></app-upload-photo>
 </div>
 
-<!-- fotos FIN -->
-
-
- <!-- Busqueda por referencia-->
-<div class="card center col-md-4">
-  <input type="text" name="referencia" [(ngModel)]="referencia" class="input-group-text text-center form-control"
-    placeholder="Número de referencia" />
-
-  <button class="btn btn-info btn-block" color="primary" aria-label="Example icon button with a delete icon"
-    (click)="SerchReference(referencia)">
-    Buscar
-  </button>
-</div>
- <!-- Busqueda por referencia FIN-->
- <app-upload-photo></app-upload-photo>

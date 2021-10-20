@@ -1,5 +1,4 @@
-import { Variable } from '@angular/compiler/src/render3/r3_ast';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, Output, ViewChild } from '@angular/core';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConsultsService } from '../services/consults.service';
 
@@ -17,6 +16,9 @@ export class UploadPhotoComponent {
   index:number = 0;
   index2:number = 0;
   images = [];
+  calScroll:any;
+
+
 
   constructor(config: NgbModalConfig, 
               private modalService: NgbModal,
@@ -27,14 +29,29 @@ export class UploadPhotoComponent {
     config.animation = true;
     config.size = 'lg';
   }
+
+  ngOnInit(): void {
+    this.scrollShow();
+  }
+
+  //Scroll
+  scrollShow  (){
+    window.scroll({ 
+      top: 700, 
+      left: 0, 
+      behavior: 'smooth' 
+    });
+  }
+
+
   open(content:any) {
     this.modalService.open(content);
   }
+  
+
+  
 
   detectFiles(event:any) {
-  // console.log(this.urls);
-  //  this.urls = [];
-   
     let files = event.target.files;
     let images = event.target.files;
     console.log(files);
@@ -45,15 +62,16 @@ export class UploadPhotoComponent {
         reader.onload = (e: any) => {
           this.index2 = this.urls.length + 1;
           this.urls.push(e.target.result);
+          this.scrollShow()
         }
         reader.readAsDataURL(file);
       }
     }
+    
   }
 
   borrarImagen(index:number){
     this.urls.splice(index,1);
-    //console.log(this.urls.length);
     this.index2 = this.urls.length;
 
   }

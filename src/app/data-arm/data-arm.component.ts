@@ -1,33 +1,67 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ConsultsService } from '../services/consults.service';
 
 
 @Component({
   selector: 'app-data-arm',
   templateUrl: './data-arm.component.html',
-  styleUrls: ['./data-arm.component.css']
+  styleUrls: ['./data-arm.component.css'],
+  providers: [NgbModalConfig, NgbModal]
 })
 export class DataArmComponent implements OnInit {
 
- 
-  referenceGet:any =[];
-  observationGet:any;
-  consultGet:any = [];
-  filterGet:any;
+//Variables
+  referenceGet?:any =[];
+  observationGet?:any;
+  filterGet?:any;
   folderGet = Array<SafeUrl>();
-  folderGet2:any ;
+  folderGet2?:any ;
   referencia:number;
-  constructor(private consultService: ConsultsService,
-              private sanitizer: DomSanitizer) { }
+  fecha:string;
+  fecha2:string;
+  showSelected:boolean = false;
+//Variables Arm
+  numeroSerie:any ;
+  tipo: any;
+  marca: any;
+  modelo: any;
+  calibre: any;
+  clase: any;
+  medida: any; 
+//Variables Arm fin
 
+
+  constructor(private consultService: ConsultsService,
+              private sanitizer: DomSanitizer,
+              private modalService: NgbModal,
+              config: NgbModalConfig) { 
+// customize default values of modals used by this component tree
+    config.backdrop = true; //'static';
+    config.keyboard = true;
+    config.animation = true;
+    config.size = 'lg';
+
+  }
+  
   ngOnInit(): void {
   }
 
+// Modal 
+open(content:any) {
+  this.modalService.open(content);
+}
+
+
+//Mostrar subir fotos 
+ShowUpload(){
+  this.showSelected = true;
+}
+
+//sanitizer images
   public getSantizeUrl(imageData: string) {
-    
     return this.sanitizer.bypassSecurityTrustUrl(imageData)
-    //bypassSecurityTrustUrl(image);
   }
 
   SerchReference (reference:number){
@@ -35,7 +69,20 @@ export class DataArmComponent implements OnInit {
       res => {
         this.referenceGet = res;
         if (this.referenceGet.idDescripcionArma != null){
-          this.Consult(this.referenceGet.idDescripcionArma)
+          console.log('hola'); 
+          this.numeroSerie = this.referenceGet.numeroSerie;
+          this.Consult(this.referenceGet.idDescripcionArma);
+        }
+        else{
+
+          this.numeroSerie = this.referenceGet.numeroSerie;
+          this.calibre = this.referenceGet.calibre;
+          this.clase   = this.referenceGet.clase;
+          this.marca   = this.referenceGet.marca;
+          this.medida  = this.referenceGet.medida;
+          this.modelo  = this.referenceGet.modelo;
+          this.tipo    = this.referenceGet.tipoArma;
+  
         }
         this.Observation(reference);
         this.Filter(reference);
@@ -51,9 +98,14 @@ export class DataArmComponent implements OnInit {
   Consult(idArma:number){
     this.consultService.getConsult(idArma).subscribe(
       res => {
-        this.consultGet = res;
-        console.log(this.consultGet);
-      },
+        var data:any = res;
+        this.calibre = data.calibre;
+        this.clase   = data.clase;
+        this.marca   = data.marca;
+        this.medida  = data.medida;
+        this.modelo  = data.modelo;
+        this.tipo    = data.tipoArma;
+    },
       err => console.log(err)
     );
   }
@@ -79,8 +131,10 @@ export class DataArmComponent implements OnInit {
   Filter(reference: number){
     this.consultService.getFilter(reference).subscribe(
       res => {
-        this.filterGet = res;
-        //console.log(this.filterGet);
+        if (res.valueOf() != ""){
+          this.filterGet = res;
+        }
+        
             },
       err => console.log(err)
     );
@@ -90,13 +144,17 @@ export class DataArmComponent implements OnInit {
   Folder(reference: number){
     this.consultService.getDirectoryArm(reference).subscribe(
       res => {
-        //console.log(res)
         this.folderGet2 = res;
         for (let r of this.folderGet2){
+          this.fecha = r;
+          if (this.fecha.indexOf("subieron/actualizaron") != -1)
+          {
+            this.fecha2 = r;
+            continue;
+          }
           var imageData = this.sanitizer.bypassSecurityTrustUrl(`data:image/*;base64,${r}`);
           this.folderGet.push(imageData);
         }
-        //console.log(this.folderGet)
       },
       err => console.log(err)
     );

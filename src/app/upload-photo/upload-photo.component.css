@@ -1,3 +1,7 @@
+h2{
+  border: 1px solid #000;
+  text-align: center;
+}
 
 .thumb {
     height: 120px;
@@ -89,7 +93,6 @@
   z-index: 10;
   position: absolute;
   width: 176px;
-  /*height: 134px;*/
   text-align: center;
   top:41px;
 }
