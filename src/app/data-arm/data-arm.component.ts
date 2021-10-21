@@ -13,7 +13,7 @@ import { ConsultsService } from '../services/consults.service';
 export class DataArmComponent implements OnInit {
 
 //Variables
-  referenceGet?:any =[];
+  referenceGet?:any;
   observationGet?:any;
   filterGet?:any;
   folderGet = Array<SafeUrl>();
@@ -57,6 +57,16 @@ open(content:any) {
 //Mostrar subir fotos 
 ShowUpload(){
   this.showSelected = true;
+}
+
+//refrescar pagina
+Refresh(){
+  this.referenceGet = null;
+  this.filterGet = null;
+  this.observationGet = null;
+  this.folderGet2 = null;
+  this.folderGet = [];
+  this.showSelected = false;
 }
 
 //sanitizer images
