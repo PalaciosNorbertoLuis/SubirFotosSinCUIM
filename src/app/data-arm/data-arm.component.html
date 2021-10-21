@@ -1,6 +1,6 @@
 <div class="container">
   <!-- Busqueda por referencia-->
-  <div class="conteiner" *ngIf="referenceGet.idTmpArma == null">
+   <div class="conteiner" >  <!--   *ngIf="referenceGet.idTmpArma == null"  -->
     <h2>Busqueda de arma por referencia</h2>
     <div class="input-group">
       <button
@@ -69,7 +69,7 @@
         class="alert alert-warning"
         *ngFor="let item of filterGet; let i = index"
       >
-        <strong>{{ filterGet[i].fecha | date:'dd/MM/yyyy' }} </strong>
+        <strong>{{ filterGet[i].fechaFiltro | date:'dd/MM/yyyy' }} </strong>
         <span>{{ filterGet[i].filtro }}</span>
         <span *ngIf="filterGet[i].tipoOperadorFiltro == 'R'; else elseBlock">
           Registral
@@ -88,7 +88,7 @@
         class="alert alert-primary"
         *ngFor="let item of observationGet; let i = index"
       >
-        <strong>{{ observationGet[i].fecha }}</strong>
+        <strong>{{ observationGet[i].fechaObservation | date:'dd/MM/yyyy' }}</strong>
         <p>{{ observationGet[i].observacion }}</p>
       </div>
     </div>
