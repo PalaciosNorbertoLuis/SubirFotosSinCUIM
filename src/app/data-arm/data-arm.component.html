@@ -1,6 +1,7 @@
 <div class="container">
+  
   <!-- Busqueda por referencia-->
-   <div class="conteiner" *ngIf="referenceGet == null">  <!--     -->
+   <div class="conteiner" *ngIf="referenceGet == null">  
     <h2>Busqueda de arma por referencia</h2>
     <div class="input-group">
       <button
@@ -13,6 +14,9 @@
       </button>
       <input
         type="text"
+        [min] = '0'
+        [maxLength] = 8
+        oninput="value = value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
         name="referencia"
         [(ngModel)]="referencia"
         class="form-control"
@@ -50,12 +54,20 @@
       </div>
     </div>
     <div
-      class="alert alert-secondary"
+      class="alert alert-secondary d-flex justify-content-around"
       role="alert"
       *ngIf="referenceGet.estado != null"
     >
-      <strong>Estado: </strong> {{ referenceGet.estado
-      }}<span *ngIf="referenceGet.idDescArmaFK == null">--Falta-K</span>
+      <div>
+        <strong>Estado: </strong> {{ referenceGet.estado}}
+        <span *ngIf="referenceGet.idDescArmaFK == null">
+          --Falta-K
+        </span>
+      </div>
+      <div>
+        <strong>Referencia: </strong>
+        {{referencia}}
+      </div>
     </div>
   </div>
 
@@ -69,12 +81,16 @@
         class="alert alert-warning"
         *ngFor="let item of filterGet; let i = index"
       >
-        <strong>{{ filterGet[i].fechaFiltro | date:'dd/MM/yyyy' }} </strong>
-        <span>{{ filterGet[i].filtro }}</span>
-        <span *ngIf="filterGet[i].tipoOperadorFiltro == 'R'; else elseBlock">
-          Registral
-        </span>
-        <ng-template #elseBlock> Técnico</ng-template>
+        <strong *ngIf="filterGet[i].tipoOperadorFiltro == 'R'; else elseBlock">
+        Registral 
+        </strong>
+        <ng-template #elseBlock><strong>Técnico </strong></ng-template>
+        
+        <span>(</span>
+        <span>{{filterGet[i].fechaFiltro | date:'dd/MM/yyyy'}}</span>
+        <span> {{filterGet[i].operador}}</span>
+        <span>)</span>
+        <span> {{filterGet[i].filtro}}</span> 
       </div>
     </div>
   </div>
@@ -96,9 +112,15 @@
   <!-- Observaciones FIN-->
 
   <!-- Fotos -->
+  <div *ngIf="folderGet2 == null && sinFotos" class="card">
+    <h2>
+      {{ tituloFecha }}
+    </h2>
+
+  </div>
   <div *ngIf="folderGet2 != null" class="card">
     <h2>
-      {{ fecha2 }}
+      {{ tituloFecha }}
     </h2>
     <div class="flex">
       <div *ngFor="let image of folderGet; let i = index" class="flex">
@@ -143,23 +165,26 @@
   </div>
   <!-- fotos FIN -->
 
-  <div *ngIf="referenceGet != null" class="d-flex justify-content-around">
-    <button
-      class="btn btn btn-outline-primary"
-      type="button"
-      (click)="ShowUpload()"
-    >
-      Subir fotos
-    </button>
+  <div *ngIf="referenceGet != null" class="card">
+    <div class="d-flex justify-content-around" >
+      <button
+        class="btn btn btn-outline-primary"
+        type="button"
+        (click)="ShowUpload()"
+      >
+        Subir fotos
+      </button>
 
-    <button
-      class="btn btn btn-outline-primary"
-      type="button"
-      (click)="Refresh()"
-    >
-      Nueva busqueda
-    </button>
+      <button
+        class="btn btn btn-outline-primary"
+        type="button"
+        (click)="Refresh()"
+      >
+        Nueva busqueda
+      </button>
+    </div>
   </div>
-  <app-upload-photo *ngIf="showSelected"></app-upload-photo>
+   <app-upload-photo *ngIf="showSelected"></app-upload-photo>
+   <div class="buttonFooter"></div>
 </div>
 

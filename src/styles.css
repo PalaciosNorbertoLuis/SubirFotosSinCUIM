@@ -1,2 +1,40 @@
 
- 
+ html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+
+.shadoww{
+  text-align: center;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 1px -1px rgba(0,0,0,.2),0 2px 1px 0 rgba(0,0,0,.46),0 1px 3px 0 rgba(0,0,0,.12);
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  height: 62px;
+  line-height: 60px;
+  margin-inline: 35%; 
+  width: max-content;
+}
+.buttonFooter{
+    padding-bottom: 130px;
+}
+.image{
+    width: 35px;
+    height: 35px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.anmac{
+    font-size: 20px;
+    margin-left: initial;
+    vertical-align: middle;
+}

@@ -18,10 +18,11 @@ export class DataArmComponent implements OnInit {
   filterGet?:any;
   folderGet = Array<SafeUrl>();
   folderGet2?:any ;
-  referencia:number;
+  referencia:any;
   fecha:string;
-  fecha2:string;
+  tituloFecha:string;
   showSelected:boolean = false;
+  sinFotos:boolean = false;
 //Variables Arm
   numeroSerie:any ;
   tipo: any;
@@ -61,6 +62,7 @@ ShowUpload(){
 
 //refrescar pagina
 Refresh(){
+  this.referencia = "";
   this.referenceGet = null;
   this.filterGet = null;
   this.observationGet = null;
@@ -84,7 +86,6 @@ Refresh(){
           this.Consult(this.referenceGet.idDescripcionArma);
         }
         else{
-
           this.numeroSerie = this.referenceGet.numeroSerie;
           this.calibre = this.referenceGet.calibre;
           this.clase   = this.referenceGet.clase;
@@ -92,7 +93,6 @@ Refresh(){
           this.medida  = this.referenceGet.medida;
           this.modelo  = this.referenceGet.modelo;
           this.tipo    = this.referenceGet.tipoArma;
-  
         }
         this.Observation(reference);
         this.Filter(reference);
@@ -143,6 +143,7 @@ Refresh(){
       res => {
         if (res.valueOf() != ""){
           this.filterGet = res;
+          console.log(res);
         }
         
             },
@@ -155,11 +156,16 @@ Refresh(){
     this.consultService.getDirectoryArm(reference).subscribe(
       res => {
         this.folderGet2 = res;
+ 
         for (let r of this.folderGet2){
           this.fecha = r;
+          if (this.fecha.indexOf("Aún no hay fotos para la referencia") != -1){
+            this.tituloFecha = r;
+            break;
+          }
           if (this.fecha.indexOf("subieron/actualizaron") != -1)
           {
-            this.fecha2 = r;
+            this.tituloFecha = r;
             continue;
           }
           var imageData = this.sanitizer.bypassSecurityTrustUrl(`data:image/*;base64,${r}`);
