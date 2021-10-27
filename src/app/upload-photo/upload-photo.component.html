@@ -67,22 +67,26 @@
     />
     </div>
   </div>
-    <div class="card" *ngIf="index2 != 0 ">
+    <div class="card" *ngIf="index2 != 0">
       <button
         mat-raised-button
         color="primary"
         aria-label="Example icon button with a delete icon"
+        (click)="saveImage(urls)"
+       
       >
         <mat-icon>
           drive_folder_upload
         </mat-icon>
         Guardar Fotos
       </button>
+
     
 </div>
 <!-- </div> -->
 
 
 <!-- Test -->
-
 <!-- Test -->
+
+

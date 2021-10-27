@@ -1,4 +1,4 @@
-import { Component, ElementRef, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, Output, ViewChild } from '@angular/core';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConsultsService } from '../services/consults.service';
 
@@ -11,13 +11,15 @@ import { ConsultsService } from '../services/consults.service';
 })
 
 export class UploadPhotoComponent {
+//Variables
   urls =  Array<string>();
   files = [];
   index:number = 0;
   index2:number = 0;
-  images = [];
+  images:Array<string>= [];
   calScroll:any;
-
+  mensaje:any;
+  @Input() referencia:any;
 
 
   constructor(config: NgbModalConfig, 
@@ -53,27 +55,34 @@ export class UploadPhotoComponent {
 
   detectFiles(event:any) {
     let files = event.target.files;
-    let images = event.target.files;
-    console.log(files);
+
     if (files) {
-      
       for (let file of files) {
         let reader = new FileReader();
         reader.onload = (e: any) => {
           this.index2 = this.urls.length + 1;
           this.urls.push(e.target.result);
-          this.scrollShow()
+          this.scrollShow();
         }
         reader.readAsDataURL(file);
       }
     }
-    
+
+  }
+
+  saveImage(files:any){
+   this.consultService.postDirectoryArm(files,this.referencia).subscribe(
+     res =>{
+       this.mensaje = res;
+       console.log(this.mensaje + "Respuestas");
+      },
+      err=> console.log(err)
+      );
   }
 
   borrarImagen(index:number){
     this.urls.splice(index,1);
     this.index2 = this.urls.length;
-
   }
 
 

@@ -31,7 +31,6 @@ export class DataArmComponent implements OnInit {
   calibre: any;
   clase: any;
   medida: any; 
-//Variables Arm fin
 
 
   constructor(private consultService: ConsultsService,
@@ -69,19 +68,19 @@ Refresh(){
   this.folderGet2 = null;
   this.folderGet = [];
   this.showSelected = false;
+  this.fecha = "";
 }
 
 //sanitizer images
-  public getSantizeUrl(imageData: string) {
-    return this.sanitizer.bypassSecurityTrustUrl(imageData)
-  }
+  // public getSantizeUrl(imageData: string) {
+  //   return this.sanitizer.bypassSecurityTrustUrl(imageData)
+  // }
 
   SerchReference (reference:number){
     this.consultService.getReference(reference).subscribe(
       res => {
         this.referenceGet = res;
         if (this.referenceGet.idDescripcionArma != null){
-          console.log('hola'); 
           this.numeroSerie = this.referenceGet.numeroSerie;
           this.Consult(this.referenceGet.idDescripcionArma);
         }
@@ -97,7 +96,6 @@ Refresh(){
         this.Observation(reference);
         this.Filter(reference);
         this.Folder(reference);
-        console.log(this.referenceGet);
       },
       err => console.log(err)
     );
@@ -131,7 +129,6 @@ Refresh(){
     this.consultService.getObservation(reference).subscribe(
       res => {
         this.observationGet = res;
-        console.log(this.observationGet);
       },
       err => console.log(err)
     );
@@ -143,7 +140,6 @@ Refresh(){
       res => {
         if (res.valueOf() != ""){
           this.filterGet = res;
-          console.log(res);
         }
         
             },
@@ -151,23 +147,25 @@ Refresh(){
     );
     
   }
-
+  //Busqueda de fotos
   Folder(reference: number){
     this.consultService.getDirectoryArm(reference).subscribe(
       res => {
         this.folderGet2 = res;
- 
+        //Carga el titulo si no hay fotos.
+        if (this.folderGet2.indexOf("Aún no hay fotos para la referencia") != -1){
+          this.tituloFecha = this.folderGet2;
+          return;
+        }
+        //Si hay fotos carga las fotos y el titulo con la fecha. 
         for (let r of this.folderGet2){
           this.fecha = r;
-          if (this.fecha.indexOf("Aún no hay fotos para la referencia") != -1){
-            this.tituloFecha = r;
-            break;
-          }
           if (this.fecha.indexOf("subieron/actualizaron") != -1)
           {
             this.tituloFecha = r;
             continue;
           }
+          //Sanitiza las Url de las imagenes para visualizar en el navegador.
           var imageData = this.sanitizer.bypassSecurityTrustUrl(`data:image/*;base64,${r}`);
           this.folderGet.push(imageData);
         }
