@@ -1,6 +1,7 @@
 import { Component, ElementRef, Input, Output, ViewChild } from '@angular/core';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConsultsService } from '../services/consults.service';
+import {DataArmComponent} from '../data-arm/data-arm.component';
 
 
 @Component({
@@ -24,7 +25,8 @@ export class UploadPhotoComponent {
 
   constructor(config: NgbModalConfig, 
               private modalService: NgbModal,
-              private consultService:ConsultsService) {
+              private consultService:ConsultsService,
+              private dataArmComponet:DataArmComponent) {
     // customize default values of modals used by this component tree
     config.backdrop = true; //'static';
     config.keyboard = true;
@@ -75,6 +77,7 @@ export class UploadPhotoComponent {
      res =>{
        this.mensaje = res;
        console.log(this.mensaje + "Respuestas");
+       this.dataArmComponet.Refresh();
       },
       err=> console.log(err)
       );
