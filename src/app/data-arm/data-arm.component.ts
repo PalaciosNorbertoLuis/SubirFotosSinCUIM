@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ConsultsService } from '../services/consults.service';
-
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-data-arm',
@@ -23,6 +23,7 @@ export class DataArmComponent implements OnInit {
   tituloFecha:string;
   showSelected:boolean = false;
   sinFotos:boolean = false;
+  imageZani:SafeUrl;
 //Variables Arm
   numeroSerie:any ;
   tipo: any;
@@ -52,6 +53,18 @@ export class DataArmComponent implements OnInit {
 open(content:any) {
   this.modalService.open(content);
 }
+
+//test //
+// open(image:any) {
+// Swal.fire({
+//   showCloseButton: true,
+//   showConfirmButton:false,
+//   imageUrl: `${image.changingThisBreaksApplicationSecurity}`,
+//   imageWidth: 700,
+//   imageHeight: 540,
+// })}
+
+///tets///
 
 
 //Mostrar subir fotos 

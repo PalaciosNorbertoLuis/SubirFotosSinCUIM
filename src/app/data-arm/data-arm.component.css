@@ -19,6 +19,10 @@ display: block;
 transition-duration: 0.7s;
 }
 
+.card-botton{
+  padding: 10px;
+}
+
 .caption-style-2 li{
 float: left;
 padding: 0px;

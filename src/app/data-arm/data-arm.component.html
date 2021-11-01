@@ -1,7 +1,6 @@
 <div class="container">
-  
   <!-- Busqueda por referencia-->
-   <div class="conteiner" *ngIf="referenceGet == null">  
+  <div class="conteiner" *ngIf="referenceGet == null">
     <h2>Busqueda de arma por referencia</h2>
     <div class="input-group">
       <button
@@ -14,8 +13,8 @@
       </button>
       <input
         type="text"
-        [min] = '0'
-        [maxLength] = 8
+        [min]="0"
+        [maxLength]="8"
         oninput="value = value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
         name="referencia"
         [(ngModel)]="referencia"
@@ -59,14 +58,12 @@
       *ngIf="referenceGet.estado != null"
     >
       <div>
-        <strong>Estado: </strong> {{ referenceGet.estado}}
-        <span *ngIf="referenceGet.idDescArmaFK == null">
-          --Falta-K
-        </span>
+        <strong>Estado: </strong> {{ referenceGet.estado }}
+        <span *ngIf="referenceGet.idDescArmaFK == null"> --Falta-K </span>
       </div>
       <div>
         <strong>Referencia: </strong>
-        {{referencia}}
+        {{ referencia }}
       </div>
     </div>
   </div>
@@ -82,15 +79,15 @@
         *ngFor="let item of filterGet; let i = index"
       >
         <strong *ngIf="filterGet[i].tipoOperadorFiltro == 'R'; else elseBlock">
-        Registral 
+          Registral
         </strong>
         <ng-template #elseBlock><strong>Técnico </strong></ng-template>
-        
+
         <span>(</span>
-        <span>{{filterGet[i].fechaFiltro | date:'dd/MM/yyyy'}}</span>
-        <span> {{filterGet[i].operador}}</span>
+        <span>{{ filterGet[i].fechaFiltro | date: "dd/MM/yyyy" }}</span>
+        <span> {{ filterGet[i].operador }}</span>
         <span>)</span>
-        <span> {{filterGet[i].filtro}}</span> 
+        <span> {{ filterGet[i].filtro }}</span>
       </div>
     </div>
   </div>
@@ -104,7 +101,9 @@
         class="alert alert-primary"
         *ngFor="let item of observationGet; let i = index"
       >
-        <strong>{{ observationGet[i].fechaObservation | date:'dd/MM/yyyy' }}</strong>
+        <strong>{{
+          observationGet[i].fechaObservation | date: "dd/MM/yyyy"
+        }}</strong>
         <p>{{ observationGet[i].observacion }}</p>
       </div>
     </div>
@@ -116,7 +115,6 @@
     <h2>
       {{ tituloFecha }}
     </h2>
-
   </div>
   <div *ngIf="folderGet2 != null" class="card">
     <h2>
@@ -124,28 +122,28 @@
     </h2>
     <div class="flex">
       <div *ngFor="let image of folderGet; let i = index" class="flex">
+        <!-- modal Inicio -->
+        <ng-template #content let-c="close" let-d="dismiss">
+          <div class="modal-body">
+            <img class="img-modal" [src]="image" />
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-outline-dark"
+              (click)="c('Save click')"
+            >
+              Cerrar
+            </button>
+          </div>
+        </ng-template>
+        <!--Modal Fin-->
         <ul class="caption-style-2">
           <li>
             <img [src]="image" />
             <div class="caption">
               <div class="blur">
                 <div class="caption-text">
-                  <!-- modal Inicio -->
-                  <ng-template #content let-c="close" let-d="dismiss">
-                    <div class="modal-body">
-                      <img class="img-modal" [src]="image" />
-                    </div>
-                    <div class="modal-footer">
-                      <button
-                        type="button"
-                        class="btn btn-outline-dark"
-                        (click)="c('Save click')"
-                      >
-                        Cerrar
-                      </button>
-                    </div>
-                  </ng-template>
-
                   <button
                     mat-fab
                     color="primary"
@@ -154,7 +152,6 @@
                   >
                     <mat-icon>zoom_in</mat-icon>
                   </button>
-                  <!--Modal Fin-->
                 </div>
               </div>
             </div>
@@ -165,8 +162,8 @@
   </div>
   <!-- fotos FIN -->
 
-  <div *ngIf="referenceGet != null" class="card">
-    <div class="d-flex justify-content-around" >
+  <div *ngIf="referenceGet != null" class="card card-botton">
+    <div class="d-flex justify-content-around">
       <button
         class="btn btn btn-outline-primary"
         type="button"
@@ -184,7 +181,9 @@
       </button>
     </div>
   </div>
-   <app-upload-photo [referencia]="referencia" *ngIf="showSelected"></app-upload-photo>
-   <div class="buttonFooter"></div>
+  <app-upload-photo
+    [referencia]="referencia"
+    *ngIf="showSelected"
+  ></app-upload-photo>
+  <div class="buttonFooter"></div>
 </div>
-

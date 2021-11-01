@@ -1,7 +1,8 @@
-import { Component, ElementRef, Input, Output, ViewChild } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConsultsService } from '../services/consults.service';
 import {DataArmComponent} from '../data-arm/data-arm.component';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -51,13 +52,9 @@ export class UploadPhotoComponent {
   open(content:any) {
     this.modalService.open(content);
   }
-  
-
-  
 
   detectFiles(event:any) {
     let files = event.target.files;
-
     if (files) {
       for (let file of files) {
         let reader = new FileReader();
@@ -69,23 +66,52 @@ export class UploadPhotoComponent {
         reader.readAsDataURL(file);
       }
     }
-
-  }
-
-  saveImage(files:any){
-   this.consultService.postDirectoryArm(files,this.referencia).subscribe(
-     res =>{
-       this.mensaje = res;
-       console.log(this.mensaje + "Respuestas");
-       this.dataArmComponet.Refresh();
-      },
-      err=> console.log(err)
-      );
   }
 
   borrarImagen(index:number){
     this.urls.splice(index,1);
     this.index2 = this.urls.length;
+  }
+
+  //Guardar los cambios. 
+  
+  successNotification(){
+    Swal.fire({
+      allowOutsideClick: false,
+      focusConfirm:true,
+      
+      title: `Desea guardar las fotos 
+       en la Referencia:${this.referencia}?`,
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: 'Guardar',
+      denyButtonText: `No guardar`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+          this.consultService.postDirectoryArm(this.urls,this.referencia).subscribe(
+            res =>{
+              this.mensaje = res;
+              Swal.fire({
+                icon: 'success',
+                title: 'Se guardaron las fotos',
+                allowOutsideClick: false
+              }).then(() => { 
+                this.dataArmComponet.Refresh();
+              })},
+             err=> console.log(err)
+             );
+      } else if (result.isDenied) {
+        Swal.fire({
+          icon: 'info',
+          title: 'No se realizaron los cambios',
+          allowOutsideClick: false
+        })
+        // .then(() => { 
+        //   this.dataArmComponet.Refresh();
+        // })
+      }
+    })
   }
 
 

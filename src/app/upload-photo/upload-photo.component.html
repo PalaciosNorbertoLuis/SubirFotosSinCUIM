@@ -67,12 +67,13 @@
     />
     </div>
   </div>
-    <div class="card" *ngIf="index2 != 0">
+    <div class="card card-botton" *ngIf="index2 != 0">
       <button
+        class="button"
         mat-raised-button
         color="primary"
         aria-label="Example icon button with a delete icon"
-        (click)="saveImage(urls)"
+        (click)="successNotification()"
        
       >
         <mat-icon>
