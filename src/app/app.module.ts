@@ -15,13 +15,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { ConsultsService } from './services/consults.service';
 import { DataArmComponent } from './data-arm/data-arm.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
     UploadPhotoComponent,
     LoginComponent,
     PageNotFoundComponent,
-    DataArmComponent
+    DataArmComponent,
+    
     
   ],
   imports: [

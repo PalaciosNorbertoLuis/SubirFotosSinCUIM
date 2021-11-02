@@ -44,7 +44,7 @@ export class UploadPhotoComponent {
     window.scroll({ 
       top: 1000, 
       left: 0, 
-      behavior: 'smooth' 
+      behavior: 'smooth'
     });
   }
 
@@ -79,13 +79,13 @@ export class UploadPhotoComponent {
     Swal.fire({
       allowOutsideClick: false,
       focusConfirm:true,
-      
       title: `Desea guardar las fotos 
        en la Referencia:${this.referencia}?`,
       showDenyButton: true,
       showCancelButton: false,
-      confirmButtonText: 'Guardar',
-      denyButtonText: `No guardar`,
+      confirmButtonText: '<i class="material-icons">add_to_photos</i> <i class="buttonConfirm">Guardar</i>',
+      denyButtonText: '<i class="material-icons">highlight_off</i> <i class="buttonConfirm">No guardar</i>',
+      //reverseButtons: true
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
@@ -95,6 +95,7 @@ export class UploadPhotoComponent {
               Swal.fire({
                 icon: 'success',
                 title: 'Se guardaron las fotos',
+                confirmButtonText:'<i class="material-icons">done</i>',
                 allowOutsideClick: false
               }).then(() => { 
                 this.dataArmComponet.Refresh();
@@ -105,6 +106,7 @@ export class UploadPhotoComponent {
         Swal.fire({
           icon: 'info',
           title: 'No se realizaron los cambios',
+          confirmButtonText:'<i class="material-icons">done</i>',
           allowOutsideClick: false
         })
         // .then(() => { 

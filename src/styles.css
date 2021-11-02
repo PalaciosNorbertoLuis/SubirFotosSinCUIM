@@ -38,3 +38,7 @@ body {
     margin-left: initial;
     vertical-align: middle;
 }
+
+.buttonConfirm{
+  vertical-align: super;
+}
