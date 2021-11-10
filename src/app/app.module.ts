@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
@@ -11,9 +11,11 @@ import { MatSliderModule } from '@angular/material/slider';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import { NgbModule,NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS  } from '@angular/common/http';
 import { ConsultsService } from './services/consults.service';
 import { DataArmComponent } from './data-arm/data-arm.component';
+import { LoginService } from './services/login.service';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @NgModule({
@@ -23,8 +25,6 @@ import { DataArmComponent } from './data-arm/data-arm.component';
     LoginComponent,
     PageNotFoundComponent,
     DataArmComponent,
-    
-    
   ],
   imports: [
     BrowserModule,
@@ -40,7 +40,10 @@ import { DataArmComponent } from './data-arm/data-arm.component';
     HttpClientModule
   ],
   providers: [
-    ConsultsService
+    
+    ConsultsService,
+    LoginService,
+    CookieService
   ],
   bootstrap: [AppComponent]
 })

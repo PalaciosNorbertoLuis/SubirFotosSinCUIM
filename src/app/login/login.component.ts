@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewEncapsulation} from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators,ReactiveFormsModule } from '@angular/forms';
-import { LoginService } from '../login.service';
+import { FormGroup, FormControl, Validators,FormBuilder } from '@angular/forms';
+import { LoginService } from '../services/login.service';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
+
 
 
 @Component({
@@ -10,41 +13,46 @@ import { LoginService } from '../login.service';
   styleUrls: ['./login.component.css' ]
 })
 export class LoginComponent implements OnInit{
-
-  // formLogin = new FormGroup({
-  //   user: new FormControl(''),
-  //   password: new FormControl(''),
-  // })
-  formLogin: FormGroup;
+  loginForm: FormGroup;
 
 
-  constructor(private loginService:LoginService,
-              private fb: FormBuilder) { }
-  ngOnInit(): void {
-    this.initForm();
+  public loginError?:String;
+  constructor(private loginService:LoginService, 
+              private router:Router,
+              private fb:FormBuilder) { }
+
+  ngOnInit() {
+    this.loginForm = this.fb.group({
+      user: new FormControl('', [Validators.required, Validators.minLength(2)]),
+      password: new FormControl('', [Validators.required, Validators.minLength(6)])
+    })
+  
+    this.loginService.isLoggedIn();
   }
 
-
-  private initForm(): void{
-     this.formLogin = this.fb.group({
-       user: ['', [Validators.required]],
-       password: ['', [Validators.required, Validators.minLength(6)]]
-     })
-   }
-
-
-  onLogin():void{
-    if (this.formLogin.valid){
-      //console.log(this.formLogin.value);
-      this.loginService.login(this.formLogin);
-    }else{
-      console.log(this.formLogin.errors)
-    }
-
-    // const user = this.formLogin.value.user;
-    // const password = this.formLogin.value.password;
-    // console.log (user + password);
-    //this.loginService.logueo(user,password);
+  onSubmit(){  
+    //console.log(this.loginForm.value);
+    if(this.loginForm.valid){
+      this.loginService.login(this.loginForm.value)
+      .subscribe((data) => {
+        //console.log(data);
+        if(data.body?.hasOwnProperty('token')){
+          //console.log("Entro al if status"+ data.body?.mensaje);
+          this.router.navigate(['/']);
+        }else{
+            Swal.fire({
+              icon: 'error',
+              title: `<p style="color:red">${data.body?.mensaje}</p>`,
+              showConfirmButton: false,
+              timer: 2200,
+              timerProgressBar: true,
+            });
+            this.ngOnInit();
+            return;
+        }        
+      },
+      error => this.loginError = error
+      )
+    }    
   }
-
 }

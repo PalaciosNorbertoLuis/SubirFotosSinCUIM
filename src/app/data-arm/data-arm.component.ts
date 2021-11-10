@@ -3,6 +3,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ConsultsService } from '../services/consults.service';
 import Swal from 'sweetalert2';
+import { LoginService } from '../services/login.service';
 
 //import Swal from 'sweetalert2';
 
@@ -35,6 +36,7 @@ export class DataArmComponent implements OnInit {
   medida: any;
 
   constructor(
+    private loginService:LoginService,
     private consultService: ConsultsService,
     private sanitizer: DomSanitizer,
     private modalService: NgbModal,
@@ -48,6 +50,12 @@ export class DataArmComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  ///prueba logout
+  
+  logout(){
+    this.loginService.logout();
+  }
 
   // Modal
   open(content: any) {

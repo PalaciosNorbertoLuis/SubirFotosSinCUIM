@@ -7,9 +7,9 @@
   <div class="container">
     <h1>Ingreso</h1>
     <h4>Subir fotos sin CUIM</h4>
-    <form (ngSubmit)="onLogin()" [formGroup]="formLogin">
+    <form novalidate [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <div class="form-control">
-        <input type="text" name="user" required formControlName="user"  autocomplete=off/>
+      <input type="text" name="user" required formControlName="user"  autocomplete=off>
         <label>
           <span style="transition-delay: 0ms">U</span>
           <span style="transition-delay: 50ms">s</span>
@@ -19,8 +19,12 @@
           <span style="transition-delay: 250ms">i</span>
           <span style="transition-delay: 300ms">o</span>
         </label>
+        <div
+        class="alert alert-danger" role="alert" style="color: red;"
+        *ngIf="loginForm.get('user')!.hasError('required') && loginForm.get('user')!.touched">
+        Nombre requerido
+        </div>
       </div>
-
       <div class="form-control">
         <input
           type="password"
@@ -40,9 +44,14 @@
           <span style="transition-delay: 400ms">ñ</span>
           <span style="transition-delay: 450ms">a</span>
         </label>
-      </div>
+        <div
+        class="alert alert-danger" role="alert" style="color: red;"
+        *ngIf="loginForm.get('password')!.hasError('required') && loginForm.get('password')!.touched">
+        Contraseña requerido
+        </div>
 
-      <button class="btn" id="BTN" type="submit">Ingresar</button>
+      </div>
+      <button class="btn" id="BTN" type="submit" [disabled]="loginForm.invalid">Ingresar</button>
     </form>
   </div>
 </body>

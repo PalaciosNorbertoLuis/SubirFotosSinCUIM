@@ -85,7 +85,6 @@ export class UploadPhotoComponent {
       showCancelButton: false,
       confirmButtonText: '<i class="material-icons">add_to_photos</i> <i class="buttonConfirm">Guardar</i>',
       denyButtonText: '<i class="material-icons">highlight_off</i> <i class="buttonConfirm">No guardar</i>',
-      //reverseButtons: true
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
@@ -109,9 +108,6 @@ export class UploadPhotoComponent {
           confirmButtonText:'<i class="material-icons">done</i>',
           allowOutsideClick: false
         })
-        // .then(() => { 
-        //   this.dataArmComponet.Refresh();
-        // })
       }
     })
   }
