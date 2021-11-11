@@ -142,6 +142,12 @@ export class DataArmComponent implements OnInit {
     this.consultService.getObservation(reference).subscribe(
       (res) => {
         this.observationGet = res;
+        if (this.observationGet.length == 0){
+          this.observationGet = null;
+        }
+        // else{
+        //   this.observationGet = res;
+        // }
       },
       (err) => console.log(err)
     );

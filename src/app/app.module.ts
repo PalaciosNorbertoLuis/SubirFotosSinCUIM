@@ -16,6 +16,7 @@ import { ConsultsService } from './services/consults.service';
 import { DataArmComponent } from './data-arm/data-arm.component';
 import { LoginService } from './services/login.service';
 import { CookieService } from 'ngx-cookie-service';
+import { HeaderComponent } from './header/header.component';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { CookieService } from 'ngx-cookie-service';
     LoginComponent,
     PageNotFoundComponent,
     DataArmComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,

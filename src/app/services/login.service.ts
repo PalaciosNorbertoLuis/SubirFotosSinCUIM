@@ -88,10 +88,9 @@ export class LoginService {
 */
  isLoggedIn() : Observable<boolean> {
    //console.log("isLoggedIn"+ this.loginStatus.value)
-if (this.loginStatus.value){
+  if (this.loginStatus.value){
   this.router.navigate(['/']);
-}
-
+  }
   return this.loginStatus.asObservable();
  }
    /**

@@ -1,0 +1,24 @@
+    <!-- header -->
+    <nav
+      class="navbar navbar-light shadoww"
+      style="background-color: #e3f2fd; margin-bottom: 1%"
+    >
+      <div class="flex-d">
+        <img
+          class="image"
+          src="../favicon.ico"
+          height="30"
+          alt=""
+          loading="lazy"
+        />
+        <span class="anmac"> ANMaC </span>
+      </div>
+        <button 
+            mat-stroked-button 
+            (click)="LoginService.logout()" 
+            *ngIf="LoginService.loginStatus.value">
+            Salir
+        </button>
+    </nav>
+    <!-- header -->
+
