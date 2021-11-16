@@ -69,7 +69,7 @@ export class DataArmComponent implements OnInit {
 
   //refrescar pagina
   Refresh() {
-    this.referencia = '';
+    this.referencia = null;
     this.referenceGet = null;
     this.filterGet = null;
     this.observationGet = null;
@@ -145,9 +145,6 @@ export class DataArmComponent implements OnInit {
         if (this.observationGet.length == 0){
           this.observationGet = null;
         }
-        // else{
-        //   this.observationGet = res;
-        // }
       },
       (err) => console.log(err)
     );

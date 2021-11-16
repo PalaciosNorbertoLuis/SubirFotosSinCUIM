@@ -10,7 +10,8 @@ export class ConsultsService {
    httpOptions = {
      headers : new HttpHeaders({
        'Content-Type':'application/json'
-     })
+     }),
+     
    };  
   
   constructor(private http:HttpClient) { }
@@ -39,6 +40,6 @@ export class ConsultsService {
   }
 
   postDirectoryArm(images:any, referencia:any):Observable<any>{
-    return this.http.post<any>(`${this.URI}/DirectoryArm/${referencia}`,images , this.httpOptions);
+    return this.http.post<any>(`${this.URI}/DirectoryArm/${referencia}`,images , this.httpOptions); 
   }
 }
