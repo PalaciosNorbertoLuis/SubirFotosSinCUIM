@@ -49,11 +49,13 @@ export class DataArmComponent implements OnInit {
     config.size = 'lg';
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+      
+  }
 
   ///prueba logout
   
-  logout(){
+  logout(): void {
     this.loginService.logout();
   }
 
@@ -63,12 +65,12 @@ export class DataArmComponent implements OnInit {
   }
 
   //Mostrar subir fotos
-  ShowUpload() {
+  ShowUpload(): void {
     this.showSelected = true;
   }
 
   //refrescar pagina
-  Refresh() {
+  Refresh(): void {
     this.referencia = null;
     this.referenceGet = null;
     this.filterGet = null;
@@ -77,6 +79,9 @@ export class DataArmComponent implements OnInit {
     this.folderGet = [];
     this.showSelected = false;
     this.fecha = '';
+  }
+  reloadPage(): void {
+    location.reload();
   }
 // Primera busqueda (por numero de referencia) //
   SerchReference(reference: number) {
