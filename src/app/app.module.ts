@@ -17,6 +17,7 @@ import { DataArmComponent } from './data-arm/data-arm.component';
 import { LoginService } from './services/login.service';
 import { CookieService } from 'ngx-cookie-service';
 import { HeaderComponent } from './header/header.component';
+import { AuthInterceptorService } from './interceptor/auth.interceptor';
 
 
 @NgModule({
@@ -42,7 +43,11 @@ import { HeaderComponent } from './header/header.component';
     HttpClientModule
   ],
   providers: [
-    
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    },
     ConsultsService,
     LoginService,
     CookieService

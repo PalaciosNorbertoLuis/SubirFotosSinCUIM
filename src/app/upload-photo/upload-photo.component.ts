@@ -97,7 +97,7 @@ export class UploadPhotoComponent {
                 confirmButtonText:'<i class="material-icons">done</i>',
                 allowOutsideClick: false
               }).then(() => { 
-                this.dataArmComponet.Refresh();
+                this.dataArmComponet.reloadPage();
               })},
              err=> console.log(err)
              );

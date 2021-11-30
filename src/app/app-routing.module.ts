@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AuthGuard } from "./services/auth.guard";
 
+
 const routes: Routes = [
   {path: 'Login', component:LoginComponent},
   {path: '' , component:DataArmComponent, canActivate:[AuthGuard]},

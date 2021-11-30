@@ -1,3 +1,4 @@
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../services/login.service';
 
@@ -8,7 +9,7 @@ import { LoginService } from '../services/login.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(public LoginService:LoginService) { }
+  constructor(public loginService:LoginService) { }
 
   ngOnInit(): void {
   }

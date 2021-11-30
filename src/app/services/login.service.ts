@@ -10,11 +10,12 @@ import { CommonResponse } from "./common-response";
   providedIn: 'root'
 })
 export class LoginService {
+  public usuario:string = sessionStorage.getItem('usuario')!;
   private endPoint: string = "https://localhost:44347/api/";
   loginStatus = new BehaviorSubject<boolean>(this.hasToken());
   constructor(private http: HttpClient, private router: Router) { }
 token:string;
-usuario:string;
+
  /**
    * 
    * @param formData as the login form data
@@ -27,8 +28,10 @@ usuario:string;
         if(resp.body?.token){
           this.loginStatus.next(true);
           this.token = resp.body?.token;
-          this.usuario = resp.body?.user
-          sessionStorage.setItem(this.usuario, this.token)
+          this.usuario = resp.body?.nombreCompleto;
+          //console.log(this.usuario);
+          sessionStorage.setItem('token', this.token)
+          sessionStorage.setItem('usuario', this.usuario)
         }
         return resp;  
       }),
@@ -61,7 +64,7 @@ usuario:string;
 
   logout(){
     this.loginStatus.next(false);
-    window.sessionStorage.clear();
+    sessionStorage.clear();
     this.router.navigate(['/Login']);
   }
 

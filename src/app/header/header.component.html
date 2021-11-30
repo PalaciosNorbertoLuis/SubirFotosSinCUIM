@@ -13,12 +13,15 @@
         />
         <span class="anmac"> ANMaC </span>
       </div>
-        <button 
-            mat-stroked-button 
-            (click)="LoginService.logout()" 
-            *ngIf="LoginService.loginStatus.value">
-            Salir
+      <div class="dropdown" *ngIf="loginService.loginStatus.value ">
+       
+        <button class="btn btn-secondary dropdown-toggle" type="button"     id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+         <Span>{{loginService.usuario}}</Span>
         </button>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><button (click)="loginService.logout()" class="dropdown-item" type="button"><span>Salir</span></button></li>
+        </ul>
+      </div>
     </nav>
     <!-- header -->
 

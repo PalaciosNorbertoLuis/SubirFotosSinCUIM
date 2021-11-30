@@ -70,16 +70,16 @@ export class DataArmComponent implements OnInit {
   }
 
   //refrescar pagina
-  Refresh(): void {
-    this.referencia = null;
-    this.referenceGet = null;
-    this.filterGet = null;
-    this.observationGet = null;
-    this.folderGet2 = null;
-    this.folderGet = [];
-    this.showSelected = false;
-    this.fecha = '';
-  }
+  // Refresh(): void {
+  //   this.referencia = null;
+  //   this.referenceGet = null;
+  //   this.filterGet = null;
+  //   this.observationGet = null;
+  //   this.folderGet2 = null;
+  //   this.folderGet = [];
+  //   this.showSelected = false;
+  //   this.fecha = '';
+  // }
   reloadPage(): void {
     location.reload();
   }
@@ -118,7 +118,23 @@ export class DataArmComponent implements OnInit {
         this.Filter(reference);
         this.Folder(reference);
       },
-      (err) => console.log(err)
+      (err) => //console.log(err)
+      {
+        //console.log(err)
+        
+        if (err.status == 401){
+          this.loginService.logout();
+          Swal.fire({
+            icon: 'info',
+            title: `La sessión a finalizado 
+                    Ingrese nuevamente`,
+            showConfirmButton: false,
+            timer: 2200,
+            timerProgressBar: true,
+          });
+        }
+
+      }
     );
   }
 
