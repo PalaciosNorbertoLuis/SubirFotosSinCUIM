@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class ConsultsService {
+export  class ConsultsService {
    URI = 'https://localhost:44347/api';
    httpOptions = {
      headers : new HttpHeaders({

@@ -5,8 +5,6 @@ import { ConsultsService } from '../services/consults.service';
 import Swal from 'sweetalert2';
 import { LoginService } from '../services/login.service';
 
-//import Swal from 'sweetalert2';
-
 @Component({
   selector: 'app-data-arm',
   templateUrl: './data-arm.component.html',
@@ -53,7 +51,6 @@ export class DataArmComponent implements OnInit {
       
   }
 
-  ///prueba logout
   
   logout(): void {
     this.loginService.logout();
@@ -68,21 +65,11 @@ export class DataArmComponent implements OnInit {
   ShowUpload(): void {
     this.showSelected = true;
   }
-
-  //refrescar pagina
-  // Refresh(): void {
-  //   this.referencia = null;
-  //   this.referenceGet = null;
-  //   this.filterGet = null;
-  //   this.observationGet = null;
-  //   this.folderGet2 = null;
-  //   this.folderGet = [];
-  //   this.showSelected = false;
-  //   this.fecha = '';
-  // }
+  //Recargar Pagina
   reloadPage(): void {
     location.reload();
   }
+
 // Primera busqueda (por numero de referencia) //
   SerchReference(reference: number) {
     this.consultService.getReference(reference).subscribe(
@@ -114,14 +101,12 @@ export class DataArmComponent implements OnInit {
           this.modelo = this.referenceGet.modelo;
           this.tipo = this.referenceGet.tipoArma;
         }
+        
         this.Observation(reference);
         this.Filter(reference);
         this.Folder(reference);
       },
-      (err) => //console.log(err)
-      {
-        //console.log(err)
-        
+      (err) => {
         if (err.status == 401){
           this.loginService.logout();
           Swal.fire({
@@ -187,6 +172,7 @@ export class DataArmComponent implements OnInit {
     this.consultService.getDirectoryArm(reference).subscribe(
       (res) => {
         this.folderGet2 = res;
+        
         //Carga el titulo si no hay fotos.
         if (
           this.folderGet2.indexOf('Aún no hay fotos para la referencia') != -1

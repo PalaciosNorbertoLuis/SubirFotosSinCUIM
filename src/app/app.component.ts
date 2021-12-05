@@ -1,5 +1,5 @@
-import { InvokeMethodExpr } from '@angular/compiler';
 import { Component } from '@angular/core';
+import { LoadingService } from './services/loading.service';
 
 
 
@@ -11,6 +11,6 @@ import { Component } from '@angular/core';
 
 
 export class AppComponent {
-
   clicked = false;
+  constructor(public loader:LoadingService){}
 }

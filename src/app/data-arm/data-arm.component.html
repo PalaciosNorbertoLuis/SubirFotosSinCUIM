@@ -123,11 +123,11 @@
       {{ tituloFecha }}
     </h2>
     <div class="flex">
-      <div *ngFor="let image of folderGet; let i = index" class="flex">
+      <div *ngFor="let image of folderGet; let i = index" class="flex" >
         <!-- modal Inicio -->
         <ng-template #content let-c="close" let-d="dismiss">
           <div class="modal-body">
-            <img class="img-modal" [src]="image" />
+            <img class="img-modal" [src]="image"/>
           </div>
           <div class="modal-footer">
             <button
@@ -142,7 +142,7 @@
         <!--Modal Fin-->
         <ul class="caption-style-2">
           <li>
-            <img [src]="image" />
+            <img [src]="image"/>
             <div class="caption">
               <div class="blur">
                 <div class="caption-text">
@@ -163,7 +163,7 @@
     </div>
   </div>
   <!-- fotos FIN -->
-
+  
   <div *ngIf="referenceGet != null" class="card card-botton">
     <div class="d-flex justify-content-around">
       <button
@@ -183,6 +183,7 @@
       </button>
     </div>
   </div>
+  
   <app-upload-photo
     [referencia]="referencia"
     *ngIf="showSelected"

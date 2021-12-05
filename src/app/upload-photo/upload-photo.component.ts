@@ -27,7 +27,8 @@ export class UploadPhotoComponent {
   constructor(config: NgbModalConfig, 
               private modalService: NgbModal,
               private consultService:ConsultsService,
-              private dataArmComponet:DataArmComponent) {
+              private dataArmComponet:DataArmComponent,
+              ) {
     // customize default values of modals used by this component tree
     config.backdrop = true; //'static';
     config.keyboard = true;
@@ -39,15 +40,16 @@ export class UploadPhotoComponent {
     this.scrollShow();
   }
 
+
+
   //Scroll
   scrollShow  (){
     window.scroll({ 
-      top: 1000, 
+      top: 2000, 
       left: 0, 
       behavior: 'smooth'
     });
   }
-
 
   open(content:any) {
     this.modalService.open(content);
@@ -88,6 +90,11 @@ export class UploadPhotoComponent {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
+        window.scroll({ 
+          top: 0, 
+          left: 0, 
+          behavior: 'smooth'
+        });
           this.consultService.postDirectoryArm(this.urls,this.referencia).subscribe(
             res =>{
               this.mensaje = res;

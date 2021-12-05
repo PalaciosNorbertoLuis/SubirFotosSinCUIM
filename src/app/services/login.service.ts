@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { CommonResponse } from "./common-response";
 
@@ -29,7 +29,6 @@ token:string;
           this.loginStatus.next(true);
           this.token = resp.body?.token;
           this.usuario = resp.body?.nombreCompleto;
-          //console.log(this.usuario);
           sessionStorage.setItem('token', this.token)
           sessionStorage.setItem('usuario', this.usuario)
         }
@@ -73,7 +72,6 @@ token:string;
 * @returns {Observable<T>}
 */
  isLoggedIn() : Observable<boolean> {
-   //console.log("isLoggedIn"+ this.loginStatus.value)
   if (this.loginStatus.value){
   this.router.navigate(['/']);
   }
@@ -84,9 +82,7 @@ token:string;
    * @returns {boolean}
    */
   private hasToken() : boolean {
-    //console.log("ingreso en hasToken")
     if (window.sessionStorage.length != 0){
-      //console.log("ingreso en hasToken IF" );
       return true;
     }
     else{

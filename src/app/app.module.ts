@@ -18,6 +18,7 @@ import { LoginService } from './services/login.service';
 import { CookieService } from 'ngx-cookie-service';
 import { HeaderComponent } from './header/header.component';
 import { AuthInterceptorService } from './interceptor/auth.interceptor';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 
 @NgModule({
@@ -40,8 +41,10 @@ import { AuthInterceptorService } from './interceptor/auth.interceptor';
     MatIconModule,
     NgbModule,
     NgbAlertModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxSpinnerModule
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

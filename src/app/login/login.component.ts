@@ -31,20 +31,17 @@ export class LoginComponent implements OnInit{
   }
 
   onSubmit(){  
-    //console.log(this.loginForm.value);
     if(this.loginForm.valid){
       this.loginService.login(this.loginForm.value)
       .subscribe((data) => {
-        //console.log(data);
         if(data.body?.hasOwnProperty('token')){
-          //console.log("Entro al if status"+ data.body?.mensaje);
           this.router.navigate(['/']);
         }else{
             Swal.fire({
               icon: 'error',
-              title: `<p style="color:red">${data.body?.mensaje}</p>`,
+              title: `<p style="color:black">${data.body?.mensaje}</p>`,
               showConfirmButton: false,
-              timer: 2200,
+              timer: 2600,
               timerProgressBar: true,
             });
             this.ngOnInit();
