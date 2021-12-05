@@ -23,16 +23,17 @@ export class AuthInterceptorService  implements HttpInterceptor {
 
     if (token) {
       this.loader.show();
-      this.totalRequests++;
       request = req.clone({
         setHeaders: {
           authorization: `Bearer ${ token }`
         }
       });
+      this.totalRequests++;
     }
 
+    this.completedRequests = 0;
     return next.handle(request).pipe(
-      finalize(async () => {
+      finalize(() => {
         this.completedRequests++;
         if (this.completedRequests === this.totalRequests) {
           this.completedRequests = 0;
@@ -40,6 +41,8 @@ export class AuthInterceptorService  implements HttpInterceptor {
           this.loader.hide();
         }
       }))
+      
     }
+    
 
   }
