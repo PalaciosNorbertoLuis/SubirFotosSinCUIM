@@ -45,7 +45,7 @@ export class UploadPhotoComponent {
   //Scroll
   scrollShow  (){
     window.scroll({ 
-      top: 2000, 
+      top: 5000, 
       left: 0, 
       behavior: 'smooth'
     });
@@ -90,11 +90,6 @@ export class UploadPhotoComponent {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        window.scroll({ 
-          top: 0, 
-          left: 0, 
-          behavior: 'smooth'
-        });
           this.consultService.postDirectoryArm(this.urls,this.referencia).subscribe(
             res =>{
               this.mensaje = res;
