@@ -61,7 +61,7 @@
     >
       <div>
         <strong>Estado: </strong> {{ referenceGet.estado }}
-        <span *ngIf="referenceGet.idDescArmaFK == null && referenceGet.estado != 'Aceptado'"> --Falta-K </span>
+        <!-- <span *ngIf="referenceGet.idDescArmaFK == null && referenceGet.estado != 'Aceptado'|| referenceGet.estado != ' A Confirmar'"> --Falta-K </span> -->
       </div>
       <div>
         <strong>Referencia: </strong>
@@ -89,7 +89,7 @@
         <span>{{ filterGet[i].fechaFiltro | date: "dd/MM/yyyy" }}</span>
         <span> {{ filterGet[i].operador }}</span>
         <span>)</span>
-        <span> {{ filterGet[i].filtro }}</span>
+        <span style="color: rgb(216, 22, 22);" > {{ filterGet[i].filtro }}</span>
       </div>
     </div>
   </div>

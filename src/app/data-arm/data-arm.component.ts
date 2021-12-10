@@ -47,11 +47,8 @@ export class DataArmComponent implements OnInit {
     config.size = 'lg';
   }
 
-  ngOnInit(): void {
-      
-  }
+  ngOnInit(): void {}
 
-  
   logout(): void {
     this.loginService.logout();
   }
