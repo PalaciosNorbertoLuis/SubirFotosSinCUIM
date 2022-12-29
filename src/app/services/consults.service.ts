@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export  class ConsultsService {
-   URI = 'https://localhost:44347/api';
+   URI = 'http://localhost:5000/api';
    httpOptions = {
      headers : new HttpHeaders({
        'Content-Type':'application/json'

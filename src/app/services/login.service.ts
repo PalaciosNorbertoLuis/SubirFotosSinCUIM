@@ -11,7 +11,7 @@ import { CommonResponse } from "./common-response";
 })
 export class LoginService {
   public usuario:string = sessionStorage.getItem('usuario')!;
-  private endPoint: string = "https://localhost:44347/api/";
+  private endPoint: string = "http://localhost:5000/api/";
   loginStatus = new BehaviorSubject<boolean>(this.hasToken());
   constructor(private http: HttpClient, private router: Router) { }
 token:string;
