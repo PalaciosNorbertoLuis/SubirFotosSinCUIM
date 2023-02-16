@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation} from '@angular/core';
-import { FormGroup, FormControl, Validators,FormBuilder } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl, Validators,UntypedFormBuilder } from '@angular/forms';
 import { LoginService } from '../services/login.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
@@ -13,18 +13,18 @@ import Swal from 'sweetalert2';
   styleUrls: ['./login.component.css' ]
 })
 export class LoginComponent implements OnInit{
-  loginForm: FormGroup;
+  loginForm: UntypedFormGroup;
 
 
   public loginError?:String;
   constructor(private loginService:LoginService, 
               private router:Router,
-              private fb:FormBuilder) { }
+              private fb:UntypedFormBuilder) { }
 
   ngOnInit() {
     this.loginForm = this.fb.group({
-      user: new FormControl('', [Validators.required, Validators.minLength(2)]),
-      password: new FormControl('', [Validators.required, Validators.minLength(6)])
+      user: new UntypedFormControl('', [Validators.required, Validators.minLength(2)]),
+      password: new UntypedFormControl('', [Validators.required, Validators.minLength(6)])
     })
   
     this.loginService.isLoggedIn();
