@@ -4,5 +4,5 @@ export interface CommonResponse {
     mensaje:String,
     data:Object,
     token:any,
-    nombreCompleto:string      
+    nombreCompleto:string
 }

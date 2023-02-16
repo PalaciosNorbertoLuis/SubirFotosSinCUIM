@@ -4,6 +4,7 @@ import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { CommonResponse } from "./common-response";
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -11,7 +12,7 @@ import { CommonResponse } from "./common-response";
 })
 export class LoginService {
   public usuario:string = sessionStorage.getItem('usuario')!;
-  private endPoint: string = "http://localhost:5000/api/";
+  private URI: string = environment.apiUrl;  //"http://localhost:5000/api/";
   loginStatus = new BehaviorSubject<boolean>(this.hasToken());
   constructor(private http: HttpClient, private router: Router) { }
 token:string;
@@ -21,7 +22,8 @@ token:string;
    * @param formData as the login form data
    */
   login(formData:any):Observable<HttpResponse<CommonResponse>>{
-    return this.http.post<any>(this.endPoint+"Login",formData,  { observe: 'response' })
+    return this.http.post<any>(`${this.URI}/login`,formData,  { observe: 'response' })
+    
     .pipe(
       tap((resp: HttpResponse<CommonResponse>) => {
 
@@ -64,7 +66,7 @@ token:string;
   logout(){
     this.loginStatus.next(false);
     sessionStorage.clear();
-    this.router.navigate(['/Login']);
+    this.router.navigate(['/login']);
   }
 
 /**
