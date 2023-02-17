@@ -148,6 +148,7 @@
                 <div class="caption-text">
                   <button
                     mat-fab
+                    color="red"
                     color="primary"
                     aria-label="Example icon button with a delete icon"
                     (click)="open(content)"
@@ -189,4 +190,21 @@
     *ngIf="showSelected"
   ></app-upload-photo>
   <div class="buttonFooter"></div>
+
+<!-- test -->
+<mat-divider></mat-divider>
+<section>
+  <div class="example-label">Raised</div>
+  <div class="example-button-row">
+    <button mat-raised-button>Basic</button>
+    <button mat-raised-button color="primary">Primary</button>
+    <button mat-raised-button color="accent">Accent</button>
+    <button mat-raised-button color="warn" class="white-icon">Warn</button>
+    <button mat-raised-button disabled>Disabled</button>
+    <a mat-raised-button href="https://www.google.com/" target="_blank">Link</a>
+  </div>
+</section>
+<mat-divider></mat-divider>
+<!-- test -->
+
 </div>

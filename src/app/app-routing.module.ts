@@ -10,11 +10,11 @@ const routes: Routes = [
   {path: 'Login', component:LoginComponent},
   {path: 'Carga' , component:DataArmComponent, canActivate:[AuthGuard]},
   {path: '', redirectTo: '/Carga', pathMatch: 'full'},
-  {path: '**', component:PageNotFoundComponent, canActivate:[AuthGuard]}
+  {path: '**', component:PageNotFoundComponent}
 ];
 
 @NgModule({
-  imports: [RouterModule, RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes)], //RouterModule, 
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
