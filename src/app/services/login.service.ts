@@ -22,7 +22,7 @@ token:string;
    * @param formData as the login form data
    */
   login(formData:any):Observable<HttpResponse<CommonResponse>>{
-    return this.http.post<any>(`${this.URI}/login`,formData,  { observe: 'response' })
+    return this.http.post<any>(`${this.URI}/Login`,formData,  { observe: 'response' })
     
     .pipe(
       tap((resp: HttpResponse<CommonResponse>) => {
@@ -66,7 +66,7 @@ token:string;
   logout(){
     this.loginStatus.next(false);
     sessionStorage.clear();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/Login']);
   }
 
 /**
